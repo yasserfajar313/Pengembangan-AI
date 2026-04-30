@@ -1,0 +1,115 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nMy name is dilla. How can I assist you today?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0d99ec29-8a61-49c0-b12a-513f25a0bf22",
+      "name": "When chat message received",
+      "webhookId": "6aac1ad2-c245-4c9c-9cd5-1451b79820ad"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "NFA adalah singkatan dari NF Academy sebuah lembaga pelatihan dan pendidikan yang berfokus pada pengembangan keterampilan digital dan teknolgi"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "22ccc9a6-aa10-4d94-bbb7-097822cda694",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "8bedfef5-4b15-46ea-adcd-cc17329e6f27",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "cmeWljHlgqTOU9bS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "cd353957-2899-463c-835d-6a9986477a2c",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "71ee15e1-e390-4992-93e4-5e100aef28c2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aa4cd3afee916b120f7e8fa356be21d5858a523ecd3c76e373235c7959004818"
+  },
+  "id": "X1DafblwBP7ofVyw",
+  "tags": []
+}
